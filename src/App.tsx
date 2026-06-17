@@ -30,6 +30,9 @@ export default function App() {
         <section id="team" aria-label="Team section" style={{ overflow: 'visible', height: 'auto', minHeight: '0', maxHeight: 'none' }}>
           <Team />
         </section>
+        <section id="faq" aria-label="FAQ section">
+          <FAQ />
+        </section>
         <section id="contact" aria-label="Contact section">
           <Contact />
         </section>
