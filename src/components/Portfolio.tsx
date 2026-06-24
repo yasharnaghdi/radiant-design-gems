@@ -1,5 +1,7 @@
 'use client'
 
+import { motion } from 'framer-motion'
+
 import workProduction from '../assets/unsplash/work-production.jpg'
 import workCamera from '../assets/unsplash/work-camera.jpg'
 import workEditing from '../assets/unsplash/work-editing.jpg'
@@ -7,43 +9,58 @@ import workStudio from '../assets/unsplash/work-studio.jpg'
 import workColor from '../assets/unsplash/work-color.jpg'
 import workScreen from '../assets/unsplash/work-screen.jpg'
 
+type Work = {
+  image: string
+  category: string
+  title: string
+  description: string
+  /** Tailwind grid span classes for the asymmetric bento layout */
+  span: string
+}
+
 export function Portfolio() {
-  const works = [
+  const works: Work[] = [
     {
       image: workProduction,
       category: 'Commercial',
       title: 'On-Set Production',
       description: 'End-to-end creative direction for brand campaigns.',
+      span: 'lg:col-span-2 lg:row-span-2',
     },
     {
       image: workCamera,
       category: 'Cinematography',
       title: 'Cinematic Capture',
       description: 'Visually rich storytelling with a filmic finish.',
-    },
-    {
-      image: workEditing,
-      category: 'Post-Production',
-      title: 'Edit & Sound',
-      description: 'Precise editing and immersive audio design.',
+      span: 'lg:col-span-1 lg:row-span-1',
     },
     {
       image: workColor,
       category: 'Color',
       title: 'Color Grading',
       description: 'Signature looks crafted for every frame.',
+      span: 'lg:col-span-1 lg:row-span-1',
+    },
+    {
+      image: workEditing,
+      category: 'Post-Production',
+      title: 'Edit & Sound',
+      description: 'Precise editing and immersive audio design.',
+      span: 'lg:col-span-1 lg:row-span-2',
     },
     {
       image: workStudio,
       category: 'Studio',
       title: 'Studio Sessions',
       description: 'Controlled environments for premium results.',
+      span: 'lg:col-span-2 lg:row-span-1',
     },
     {
       image: workScreen,
       category: 'Delivery',
       title: 'Multi-Format Delivery',
       description: 'Optimized cuts for every screen and platform.',
+      span: 'lg:col-span-1 lg:row-span-1',
     },
   ]
 
@@ -65,7 +82,8 @@ export function Portfolio() {
           </h2>
 
           <p className="text-2xl lg:text-3xl text-muted-foreground max-w-4xl mx-auto leading-relaxed">
-            Our latest commercial for Hampton - exploring the lonely journey of startup founders and the power of community.
+            A selection of frames from our craft — directed, shot, graded and
+            delivered for screens of every size.
           </p>
         </div>
 
@@ -133,28 +151,40 @@ export function Portfolio() {
           </div>
         </div>
 
-        {/* Work Gallery */}
-        <div className="max-w-6xl mx-auto mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Immersive Bento Gallery */}
+        <div className="max-w-6xl mx-auto mt-20 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 lg:auto-rows-[220px] gap-5">
           {works.map((work, index) => (
-            <div
+            <motion.figure
               key={index}
-              className="group relative aspect-[4/5] rounded-2xl overflow-hidden clean-border elevated-shadow"
+              initial={{ opacity: 0, y: 32 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.7, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className={`group relative min-h-[260px] rounded-2xl overflow-hidden clean-border elevated-shadow ${work.span}`}
             >
               <img
                 src={work.image}
                 alt={work.title}
                 loading="lazy"
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-[1200ms] ease-out group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-              <div className="absolute inset-x-0 bottom-0 p-6">
-                <span className="inline-block bg-white/15 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium mb-3">
+              {/* Base wash for legibility */}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent" />
+              {/* Hover sheen */}
+              <div className="absolute inset-0 bg-gradient-to-t from-accent-purple/30 via-transparent to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100" />
+
+              <figcaption className="absolute inset-x-0 bottom-0 p-6">
+                <span className="inline-block bg-white/15 backdrop-blur-md text-white px-3 py-1 rounded-full text-xs font-medium mb-3 tracking-wide">
                   {work.category}
                 </span>
-                <h3 className="text-xl font-bold text-white mb-1">{work.title}</h3>
-                <p className="text-sm text-white/75 leading-relaxed">{work.description}</p>
-              </div>
-            </div>
+                <h3 className="text-xl lg:text-2xl font-bold text-white mb-1">
+                  {work.title}
+                </h3>
+                <p className="text-sm text-white/0 max-h-0 overflow-hidden transition-all duration-500 group-hover:text-white/80 group-hover:max-h-20 leading-relaxed">
+                  {work.description}
+                </p>
+              </figcaption>
+            </motion.figure>
           ))}
         </div>
       </div>
