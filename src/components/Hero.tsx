@@ -103,6 +103,7 @@ export function Hero() {
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover scale-110"
+        poster={heroCinema}
         autoPlay
         muted
         loop
