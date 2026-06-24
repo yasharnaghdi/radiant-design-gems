@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { Volume2, VolumeX, Menu, X } from 'lucide-react'
 import { useState, useRef, useEffect } from 'react'
+import heroCinema from '../assets/unsplash/hero-cinema.jpg'
 
 export function Hero() {
   const [isMuted, setIsMuted] = useState(true)
@@ -102,6 +103,7 @@ export function Hero() {
       <video
         ref={videoRef}
         className="absolute inset-0 w-full h-full object-cover scale-110"
+        poster={heroCinema}
         autoPlay
         muted
         loop
