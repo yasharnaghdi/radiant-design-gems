@@ -1,0 +1,44 @@
+[
+  {
+    "image": "work-production",
+    "category": "Commercial",
+    "title": "On-Set Production",
+    "description": "End-to-end creative direction for brand campaigns.",
+    "span": "lg:col-span-2 lg:row-span-2"
+  },
+  {
+    "image": "work-camera",
+    "category": "Cinematography",
+    "title": "Cinematic Capture",
+    "description": "Visually rich storytelling with a filmic finish.",
+    "span": "lg:col-span-1 lg:row-span-1"
+  },
+  {
+    "image": "work-color",
+    "category": "Color",
+    "title": "Color Grading",
+    "description": "Signature looks crafted for every frame.",
+    "span": "lg:col-span-1 lg:row-span-1"
+  },
+  {
+    "image": "work-editing",
+    "category": "Post-Production",
+    "title": "Edit & Sound",
+    "description": "Precise editing and immersive audio design.",
+    "span": "lg:col-span-1 lg:row-span-2"
+  },
+  {
+    "image": "work-studio",
+    "category": "Studio",
+    "title": "Studio Sessions",
+    "description": "Controlled environments for premium results.",
+    "span": "lg:col-span-2 lg:row-span-1"
+  },
+  {
+    "image": "work-screen",
+    "category": "Delivery",
+    "title": "Multi-Format Delivery",
+    "description": "Optimized cuts for every screen and platform.",
+    "span": "lg:col-span-1 lg:row-span-1"
+  }
+]
