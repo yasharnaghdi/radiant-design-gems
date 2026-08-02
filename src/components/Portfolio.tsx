@@ -9,6 +9,7 @@ import workEditing from '../assets/unsplash/work-editing.jpg'
 import workStudio from '../assets/unsplash/work-studio.jpg'
 import workColor from '../assets/unsplash/work-color.jpg'
 import workScreen from '../assets/unsplash/work-screen.jpg'
+import worksData from '../data/portfolio.json'
 
 type Work = {
   image: string
@@ -31,9 +32,7 @@ const imageMap: Record<string, string> = {
   'work-screen': workScreen,
 }
 
-const works: Work[] = (worksData as Omit<Work, 'image'> & { image: string }[] extends never
-  ? never
-  : Array<Omit<Work, 'image'> & { image: string }>).map((w) => ({
+const works: Work[] = worksData.map((w) => ({
   ...w,
   image: imageMap[w.image],
 }))
