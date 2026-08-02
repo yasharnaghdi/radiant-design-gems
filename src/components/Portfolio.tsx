@@ -22,50 +22,22 @@ type Work = {
 const STORAGE_KEY = 'portfolio-filter'
 const ALL = 'All'
 
-const works: Work[] = [
-  {
-    image: workProduction,
-    category: 'Commercial',
-    title: 'On-Set Production',
-    description: 'End-to-end creative direction for brand campaigns.',
-    span: 'lg:col-span-2 lg:row-span-2',
-  },
-  {
-    image: workCamera,
-    category: 'Cinematography',
-    title: 'Cinematic Capture',
-    description: 'Visually rich storytelling with a filmic finish.',
-    span: 'lg:col-span-1 lg:row-span-1',
-  },
-  {
-    image: workColor,
-    category: 'Color',
-    title: 'Color Grading',
-    description: 'Signature looks crafted for every frame.',
-    span: 'lg:col-span-1 lg:row-span-1',
-  },
-  {
-    image: workEditing,
-    category: 'Post-Production',
-    title: 'Edit & Sound',
-    description: 'Precise editing and immersive audio design.',
-    span: 'lg:col-span-1 lg:row-span-2',
-  },
-  {
-    image: workStudio,
-    category: 'Studio',
-    title: 'Studio Sessions',
-    description: 'Controlled environments for premium results.',
-    span: 'lg:col-span-2 lg:row-span-1',
-  },
-  {
-    image: workScreen,
-    category: 'Delivery',
-    title: 'Multi-Format Delivery',
-    description: 'Optimized cuts for every screen and platform.',
-    span: 'lg:col-span-1 lg:row-span-1',
-  },
-]
+const imageMap: Record<string, string> = {
+  'work-production': workProduction,
+  'work-camera': workCamera,
+  'work-editing': workEditing,
+  'work-studio': workStudio,
+  'work-color': workColor,
+  'work-screen': workScreen,
+}
+
+const works: Work[] = (worksData as Omit<Work, 'image'> & { image: string }[] extends never
+  ? never
+  : Array<Omit<Work, 'image'> & { image: string }>).map((w) => ({
+  ...w,
+  image: imageMap[w.image],
+}))
+
 
 const categories = [ALL, ...Array.from(new Set(works.map((w) => w.category)))]
 

@@ -2,40 +2,10 @@
 
 import { useState, useEffect } from 'react'
 
-const faqs = [
-  {
-    q: 'What types of video content do you produce?',
-    a: 'We craft campaign ads, brand films, trailers, short-form films, animation, and social content—tailored to your goals and optimized for every platform.',
-  },
-  {
-    q: 'How long does a typical project take?',
-    a: 'Most projects are delivered within 2–4 weeks. Timelines depend on scope, but we always agree on clear milestones before we start developing.',
-  },
-  {
-    q: 'Do you handle scripting and creative concepts?',
-    a: 'Absolutely. From the first idea to the final cut, we develop concepts, write scripts, and shape the story so your message lands with impact.',
-  },
-  {
-    q: 'Can you work with our existing brand guidelines?',
-    a: 'Yes. We integrate your fonts, colors, logos, and tone of voice so every frame feels unmistakably yours.',
-  },
-  {
-    q: 'What does the revision process look like?',
-    a: 'Each package includes structured revision rounds. You review at key stages and share feedback, and we refine until it feels exactly right.',
-  },
-  {
-    q: 'How do you price your projects?',
-    a: 'Pricing is based on scope, duration, and complexity. After a short discovery call we send a transparent quote with no hidden fees.',
-  },
-  {
-    q: 'Do you provide files in multiple formats?',
-    a: 'Yes—we deliver final videos in every resolution and aspect ratio you need, ready for web, social, broadcast, or events.',
-  },
-  {
-    q: 'How do we get started?',
-    a: 'Reach out through the contact section below. We will book a quick call, learn about your project, and develop a plan from there.',
-  },
-]
+import faqData from '../data/faq.json'
+
+const faqs: { q: string; a: string }[] = faqData
+
 
 export function FAQ() {
   const [isVisible, setIsVisible] = useState(false)
