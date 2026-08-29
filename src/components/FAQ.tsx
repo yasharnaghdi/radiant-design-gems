@@ -2,9 +2,7 @@
 
 import { useState, useEffect } from 'react'
 
-import faqData from '../data/faq.json'
-
-const faqs: { q: string; a: string }[] = faqData
+import { faqs } from '../data/schemas'
 
 
 export function FAQ() {
