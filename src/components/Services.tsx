@@ -2,13 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { ImageWithFallback } from './figma/ImageWithFallback'
-import servicesData from '../data/services.json'
+import { services } from '../data/schemas'
 
 export function Services() {
   const [isVisible, setIsVisible] = useState(false)
   const [hoveredPhoto, setHoveredPhoto] = useState<string | null>(null)
-
-  const services = servicesData
 
 
   useEffect(() => {

@@ -9,15 +9,11 @@ import workEditing from '../assets/unsplash/work-editing.jpg'
 import workStudio from '../assets/unsplash/work-studio.jpg'
 import workColor from '../assets/unsplash/work-color.jpg'
 import workScreen from '../assets/unsplash/work-screen.jpg'
-import worksData from '../data/portfolio.json'
+import { works as worksData, type PortfolioItem } from '../data/schemas'
 
-type Work = {
+type Work = Omit<PortfolioItem, 'image'> & {
+  /** Resolved local asset URL */
   image: string
-  category: string
-  title: string
-  description: string
-  /** Tailwind grid span classes for the asymmetric bento layout */
-  span: string
 }
 
 const STORAGE_KEY = 'portfolio-filter'
