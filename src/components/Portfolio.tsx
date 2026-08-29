@@ -9,7 +9,8 @@ import workEditing from '../assets/unsplash/work-editing.jpg'
 import workStudio from '../assets/unsplash/work-studio.jpg'
 import workColor from '../assets/unsplash/work-color.jpg'
 import workScreen from '../assets/unsplash/work-screen.jpg'
-import { works as worksData, type PortfolioItem } from '../data/schemas'
+import { worksData, type PortfolioItem } from '../data/schemas'
+import { DataError } from './DataError'
 
 type Work = Omit<PortfolioItem, 'image'> & {
   /** Resolved local asset URL */
@@ -28,11 +29,14 @@ const imageMap: Record<string, string> = {
   'work-screen': workScreen,
 }
 
-const works: Work[] = worksData.map((w) => ({
-  ...w,
-  image: imageMap[w.image],
-}))
+const worksError = worksData.error
 
+const works: Work[] = (worksData.data ?? [])
+  .filter((w) => imageMap[w.image])
+  .map((w) => ({
+    ...w,
+    image: imageMap[w.image],
+  }))
 
 const categories = [ALL, ...Array.from(new Set(works.map((w) => w.category)))]
 
@@ -90,6 +94,10 @@ export function Portfolio() {
           </p>
         </div>
 
+        {worksError ? (
+          <DataError section="Portfolio" details={worksError} />
+        ) : (
+        <>
         {/* Sticky Filter Bar */}
         <div className="sticky top-4 z-30 mb-16 flex justify-center">
           <div className="glass-effect rounded-full p-2 flex flex-wrap justify-center gap-2 backdrop-blur-md max-w-full">
@@ -233,6 +241,8 @@ export function Portfolio() {
             ))}
           </AnimatePresence>
         </div>
+        </>
+        )}
       </div>
     </section>
   )
