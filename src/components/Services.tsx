@@ -66,6 +66,9 @@ export function Services() {
         </div>
 
         {/* Photo Lab Clotheslines */}
+        {servicesData.error ? (
+          <DataError section="Services" details={servicesData.error} />
+        ) : (
         <div className={`w-full transform transition-all duration-1000 delay-600 ${
           isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
         }`} style={{ overflow: 'visible' }}>
