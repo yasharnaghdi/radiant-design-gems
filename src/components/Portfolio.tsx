@@ -29,11 +29,14 @@ const imageMap: Record<string, string> = {
   'work-screen': workScreen,
 }
 
-const works: Work[] = worksData.map((w) => ({
-  ...w,
-  image: imageMap[w.image],
-}))
+const worksError = worksData.error
 
+const works: Work[] = (worksData.data ?? [])
+  .filter((w) => imageMap[w.image])
+  .map((w) => ({
+    ...w,
+    image: imageMap[w.image],
+  }))
 
 const categories = [ALL, ...Array.from(new Set(works.map((w) => w.category)))]
 

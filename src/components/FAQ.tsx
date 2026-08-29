@@ -62,7 +62,10 @@ export function FAQ() {
             isVisible ? 'translate-y-0 opacity-100' : 'translate-y-12 opacity-0'
           }`}
         >
-          {faqs.map((faq, index) => {
+          {faqData.error || !faqData.data ? (
+            <DataError section="FAQ" details={faqData.error} />
+          ) : (
+          faqData.data.map((faq, index) => {
             const isOpen = openIndex === index
             return (
               <div
@@ -93,7 +96,8 @@ export function FAQ() {
                 </div>
               </div>
             )
-          })}
+          })
+          )}
         </div>
       </div>
     </section>
