@@ -35,12 +35,40 @@ export type FaqItem = z.infer<typeof FaqItemSchema>
 export type PortfolioItem = z.infer<typeof PortfolioItemSchema>
 export type ServiceItem = z.infer<typeof ServiceItemSchema>
 
-/* ---------- Validated data (parsed once at module load) ---------- */
+/* ---------- Safe validation (parsed once at module load) ---------- */
 
-export const faqs: FaqItem[] = z.array(FaqItemSchema).parse(faqJson)
-export const works: PortfolioItem[] = z
-  .array(PortfolioItemSchema)
-  .parse(portfolioJson)
-export const services: ServiceItem[] = z
-  .array(ServiceItemSchema)
-  .parse(servicesJson)
+export interface ValidatedData<T> {
+  /** Parsed data, or null when validation failed */
+  data: T | null
+  /** Human-readable validation issues, or null when valid */
+  error: string | null
+}
+
+function validate<T>(schema: z.ZodType<T>, raw: unknown, label: string): ValidatedData<T> {
+  const result = schema.safeParse(raw)
+  if (result.success) {
+    return { data: result.data, error: null }
+  }
+  const issues = result.error.issues
+    .map((i) => `${i.path.join('.') || '(root)'}: ${i.message}`)
+    .join('; ')
+  // Surface the problem loudly in dev/build logs as well
+  console.error(`[data] "${label}" failed validation:`, issues)
+  return { data: null, error: issues }
+}
+
+export const faqData: ValidatedData<FaqItem[]> = validate(
+  z.array(FaqItemSchema),
+  faqJson,
+  'faq.json',
+)
+export const worksData: ValidatedData<PortfolioItem[]> = validate(
+  z.array(PortfolioItemSchema),
+  portfolioJson,
+  'portfolio.json',
+)
+export const servicesData: ValidatedData<ServiceItem[]> = validate(
+  z.array(ServiceItemSchema),
+  servicesJson,
+  'services.json',
+)
