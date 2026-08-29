@@ -2,7 +2,8 @@
 
 import { useState, useEffect } from 'react'
 
-import { faqs } from '../data/schemas'
+import { faqData } from '../data/schemas'
+import { DataError } from './DataError'
 
 
 export function FAQ() {

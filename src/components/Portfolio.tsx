@@ -9,7 +9,8 @@ import workEditing from '../assets/unsplash/work-editing.jpg'
 import workStudio from '../assets/unsplash/work-studio.jpg'
 import workColor from '../assets/unsplash/work-color.jpg'
 import workScreen from '../assets/unsplash/work-screen.jpg'
-import { works as worksData, type PortfolioItem } from '../data/schemas'
+import { worksData, type PortfolioItem } from '../data/schemas'
+import { DataError } from './DataError'
 
 type Work = Omit<PortfolioItem, 'image'> & {
   /** Resolved local asset URL */

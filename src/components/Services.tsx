@@ -2,7 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import { ImageWithFallback } from './figma/ImageWithFallback'
-import { services } from '../data/schemas'
+import { servicesData } from '../data/schemas'
+import { DataError } from './DataError'
+
+const services = servicesData.data ?? []
 
 export function Services() {
   const [isVisible, setIsVisible] = useState(false)
