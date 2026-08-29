@@ -94,6 +94,10 @@ export function Portfolio() {
           </p>
         </div>
 
+        {worksError ? (
+          <DataError section="Portfolio" details={worksError} />
+        ) : (
+        <>
         {/* Sticky Filter Bar */}
         <div className="sticky top-4 z-30 mb-16 flex justify-center">
           <div className="glass-effect rounded-full p-2 flex flex-wrap justify-center gap-2 backdrop-blur-md max-w-full">
@@ -237,6 +241,8 @@ export function Portfolio() {
             ))}
           </AnimatePresence>
         </div>
+        </>
+        )}
       </div>
     </section>
   )
